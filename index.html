@@ -1,23 +1,568 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "InternetService",
+    "name": "인터넷광랜 가입 전문센터",
+    "description": "2026년 최신 인터넷광랜 상품 비교, 요금 절감 방법, 신규 가입 혜택 정보 제공. 전국 지역별 설치 가능 여부 및 현금 사은품 정보.",
+    "url": "https://www.example.com/internet-broadband-comparison-2026",
+    "telephone": "02-XXX-XXXX",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "서울특별시 강남구 테헤란로 123",
+      "addressLocality": "강남구",
+      "addressRegion": "서울특별시",
+      "postalCode": "06130",
+      "addressCountry": "KR"
+    },
+    "openingHours": "Mo-Fr 09:00-18:00",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "인터넷광랜 상품 목록",
+      "itemListElement": [
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"광랜 100M 상품"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"기가인터넷 500M 상품"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"기가인터넷 1G 상품"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"기가인터넷 10G 상품"}}
+      ]
+    }
+  }
+  </script>
+
+  <style>
+    /* 기본 글꼴과 색상 조화로운 부드러운 톤 적용 */
+    body {
+      font-family: 'Noto Sans KR', 'Arial', sans-serif;
+      margin: 0; padding: 0;
+      background: #f7f9fc; /* 부드러운 회색 배경 */
+      color: #333333; /* 기본 텍스트 색상 */
+      line-height: 1.7;
+    }
+    header, section, footer {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 30px;
+      background: #ffffff; /* 컨텐츠 영역 흰색 배경 */
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* 부드러운 그림자 */
+      border-radius: 12px; /* 둥근 모서리 */
+    }
+    h1, h2, h3 {
+      color: #2c3e50; /* 제목 색상 */
+      margin-top: 1.5em;
+      margin-bottom: 0.8em;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.4;
+    }
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+    h3 { font-size: 1.5rem; }
+    p, li {
+      font-size: 1.05rem;
+      color: #555555;
+      margin-bottom: 1em;
+    }
+    nav ul {
+      display: flex;
+      flex-wrap: wrap; /* 모바일 대응 */
+      gap: 15px;
+      padding-left: 0;
+      list-style: none;
+      border-bottom: 3px solid #3498db; /* 강조색 하단 border */
+      margin-bottom: 1.5em;
+    }
+    nav a {
+      text-decoration: none;
+      font-weight: 600;
+      color: #3498db; /* 링크 색상 */
+      transition: color 0.3s ease;
+      padding: 5px 0;
+      display: block;
+    }
+    nav a:hover {
+      color: #2c3e50; /* hover 색상 변경 */
+    }
+
+    /* 표 스타일 */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 0.95rem;
+      table-layout: fixed; /* 고정 레이아웃 */
+    }
+    th, td {
+      border: 1px solid #e0e0e0; /* 연한 border 색상 */
+      padding: 14px 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #3498db;
+      color: white;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    tr:nth-child(even) {
+      background-color: #f9f9f9; /* 짝수 행 배경색 */
+    }
+
+    /* 입력 폼 스타일 */
+    .input-section {
+      margin-top: 25px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 반응형 그리드 */
+      gap: 20px;
+    }
+    .input-group {
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #444;
+      font-size: 0.9rem;
+    }
+    input[type="text"], input[type="tel"], input[type="email"], select, textarea {
+      padding: 12px;
+      border: 1px solid #cccccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    input[type="text"]:focus, input[type="tel"]:focus, input[type="email"]:focus, select:focus, textarea:focus {
+      border-color: #3498db;
+      box-shadow: 0 0 5px rgba(52, 152, 219, 0.4);
+      outline: none;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    button.cta-btn {
+      background-color: #3498db;
+      color: white;
+      padding: 16px 30px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background-color 0.3s ease;
+    }
+    button.cta-btn:hover {
+      background-color: #2c3e50;
+    }
+
+    /* 이미지 스타일 */
+    .image-container {
+      margin: 30px 0;
+      text-align: center;
+    }
+    .image-container img {
+      width: 100%;
+      max-width: 800px;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    /* 그래프 스타일 */
+    .chart-container {
+      margin: 40px 0;
+      max-width: 100%;
+      overflow-x: auto;
+    }
+
+    /* FAQ 스타일 */
+    .faq .item {
+      border-bottom: 1px solid #e0e0e0;
+      padding: 18px 0;
+    }
+    .faq .item:last-child {
+      border-bottom: none;
+    }
+    .faq h3 {
+      cursor: pointer;
+      color: #2c3e50;
+      font-weight: 700;
+      margin-bottom: 8px;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+    .faq h3::after {
+      content: '+';
+      position: absolute;
+      right: 0;
+      font-size: 1.2rem;
+      line-height: 1;
+      transition: transform 0.3s ease;
+    }
+    .faq h3.active::after {
+      content: '-';
+      transform: rotate(180deg);
+    }
+    .faq p {
+      margin: 0 0 15px 0;
+      color: #555;
+      display: none; /* 초기 상태 숨김 */
+      padding-top: 10px;
+    }
+
+    /* 링크 스타일 */
+    a.external-link {
+      color: #3498db;
+      text-decoration: none;
+      border-bottom: 1px solid #3498db;
+      transition: color 0.3s ease, border-bottom 0.3s ease;
+    }
+    a.external-link:hover {
+      color: #2c3e50;
+      border-bottom: 1px solid #2c3e50;
+    }
+    /* 중요 텍스트 강조 */
+    .highlight {
+      color: #e74c3c;
+      font-weight: bold;
+    }
+    .strong {
+      font-weight: bold;
+    }
+  </style>
+
+  <script>
+    // FAQ toggle 기능
+    document.addEventListener('DOMContentLoaded', () => {
+      const faqItems = document.querySelectorAll('.faq .item h3');
+      faqItems.forEach(item => {
+        item.addEventListener('click', () => {
+          const p = item.nextElementSibling;
+          item.classList.toggle('active');
+          if (p.style.display === 'block') {
+            p.style.display = 'none';
+          } else {
+            p.style.display = 'block';
+          }
+        });
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <header>
+    <h1>2026년 인터넷광랜 가입 혜택 비교 및 요금 절약 가이드</h1>
+    <p>2026년 최신 인터넷광랜 요금제 정보와 통신사별 비교를 통해 합리적인 선택을 도와드립니다. SKT, KT, LGU+ 등 주요 통신사의 상품을 분석하고, <span class="highlight">현금 사은품</span> 및 <span class="highlight">결합 할인</span> 혜택을 극대화하는 방법을 알아보세요.</p>
     <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
+      <ul>
+        <li><a href="#overview">인터넷광랜이란?</a></li>
+        <li><a href="#types">상품 종류 및 속도</a></li>
+        <li><a href="#pricing">요금 비교 및 견적</a></li>
+        <li><a href="#benefits">사은품 및 현금지원</a></li>
+        <li><a href="#saving-tips">절약 방법</a></li>
+        <li><a href="#faq">자주 묻는 질문</a></li>
+        <li><a href="#contact">견적 문의</a></li>
+      </ul>
     </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+  </header>
+
+  <section id="overview">
+    <h2>인터넷광랜의 이해와 2026년 시장 동향</h2>
+    <p>인터넷광랜(Broadband Internet)은 기존의 느린 ADSL 방식이 아닌, 광섬유 케이블을 기반으로 한 고속 인터넷 서비스를 의미합니다. 2026년 현재는 100Mbps 속도의 광랜뿐만 아니라, 500Mbps, 1Gbps, 심지어 10Gbps의 초고속 기가인터넷이 보편화되면서 사용자들은 더욱 빠르고 안정적인 인터넷 환경을 요구하고 있습니다. 특히 <span class="strong">Gemini</span>나 <span class="strong">ChatGPT</span>와 같은 AI 기반 서비스의 대중화와 고화질 스트리밍, 클라우드 게임의 확산으로 고성능 네트워크의 수요가 급증하고 있습니다.</p>
+    <p>통신사들은 이러한 시장 변화에 맞춰 다양한 결합상품과 프로모션을 경쟁적으로 내놓고 있습니다. 단순히 <span class="highlight">저렴한곳</span>을 찾는 것을 넘어, 사용 패턴에 맞는 상품을 선택하고 <span class="highlight">현금지원</span> 혜택을 최대화하는 것이 2026년 인터넷 가입의 핵심입니다. SKT, KT, LGU+의 <span class="strong">장단점</span>과 지역별 커버리지를 정확히 파악하여 내돈내산 후기가 좋은 <span class="strong">추천</span> 상품을 선택하는 것이 중요합니다.</p>
+    <div class="image-container">
+      <img src="https://images.pexels.com/photos/17798361/pexels-photo-17798361/free-photo-of-ethernet-%EC%BC%80%EC%9D%B4%EB%B8%94.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="인터넷 광케이블 이미지" title="인터넷광랜 연결">
+    </div>
+  </section>
+
+  <section id="types">
+    <h2>인터넷 상품 종류: 광랜 vs. 기가인터넷 vs. 10기가</h2>
+    <p>인터넷광랜이라는 용어는 과거 100Mbps 속도를 의미했지만, 현재는 <span class="strong">기가인터넷(Gigabit Internet)</span>이 대중화되면서 광랜의 의미가 고속 인터넷 전반으로 확대되었습니다. 2026년 기준 주요 상품은 속도에 따라 100M, 500M, 1G로 나뉘며, 전문가용으로는 10G 상품도 제공됩니다.</p>
+    <h3>1. 광랜 100Mbps 상품</h3>
+    <p>가장 기본적인 상품으로, 웹 서핑, 이메일, 유튜브 시청 등 일반적인 가정용 사용에 적합합니다. 100Mbps 상품은 요금이 가장 <span class="strong">저렴한곳</span>으로 알려져 있으며, 통신사별 <span class="strong">평균</span> 요금 차이가 크지 않습니다. 하지만 동시에 여러 기기가 접속하거나 고화질 4K 스트리밍, 클라우드 서비스 이용이 잦다면 속도 저하를 느낄 수 있습니다.</p>
+    <h3>2. 기가인터넷 500Mbps 상품</h3>
+    <p>가장 많은 <span class="strong">가입</span>이 이루어지는 상품입니다. 100M 광랜 대비 5배 빠른 속도를 제공하여 4K 스트리밍, 대용량 파일 다운로드, 온라인 게임 등에 적합합니다. 2~3인 가구에서 모바일 <span class="strong">결합상품</span>을 통해 <span class="strong">비용</span> 절감을 할 때 가장 효율적인 선택지로 꼽힙니다. 통신사별 <span class="highlight">현금지원</span> 혜택도 500Mbps 상품에 집중되는 경향이 있습니다.</p>
+    <h3>3. 기가인터넷 1Gbps 상품</h3>
+    <p>4인 이상 다인 가구 또는 IT 전문가, 스트리머, 1인 미디어 크리에이터 등에게 <span class="strong">추천</span>되는 상품입니다. 초당 100MB 이상의 다운로드 속도를 제공하여 8K 영상 스트리밍이나 대용량 파일 업로드/다운로드가 많은 환경에 최적화되어 있습니다. 요금은 500Mbps 상품 대비 약 30% 정도 높지만, <span class="strong">장점</span>은 속도와 안정성 측면에서 압도적인 만족도를 제공합니다. <span class="strong">단점</span>으로는 고가 요금제라는 점과 지역별 인프라 차이로 인해 설치가 불가능할 수 있다는 점이 있습니다.</p>
+    <h3>4. 10기가 인터넷 상품</h3>
+    <p>전문적인 작업을 하는 소호(SOHO) 사무실이나 데이터 센터, 혹은 극도로 빠른 속도를 요구하는 사용자들을 위한 프리미엄 상품입니다. 일반 가정에서는 <span class="strong">가입</span> 수요가 적지만, 2026년 이후 AI 관련 서비스 및 초고속 데이터 전송 요구가 증가하면서 <span class="strong">순위</span>가 상승하고 있습니다. <span class="strong">가격</span>이 비싸므로 반드시 자신의 사용 목적에 맞는 <span class="strong">견적</span>을 받아보는 것이 좋습니다.</p>
+  </section>
+
+  <section id="pricing">
+    <h2>2026년 인터넷광랜 통신사별 요금 비교 및 견적</h2>
+    <p>인터넷광랜의 <span class="strong">요금</span>은 단순히 속도뿐만 아니라 통신사, 결합 유무, <span class="strong">가입</span> 조건(약정 기간)에 따라 천차만별입니다. 특히 <span class="strong">결합상품</span> 할인이 중요하며, 자신이 사용 중인 휴대폰 통신사와 동일한 통신사로 <span class="strong">신규 가입</span>을 할 경우 요금 절감 <span class="highlight">혜택</span>이 가장 큽니다. 아래 표는 2026년 주요 통신사별 3년 약정 기준 <span class="strong">평균</span> 요금표입니다. 실제 <span class="strong">비용</span>은 지역별 프로모션에 따라 다를 수 있습니다.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>상품 종류</th>
+          <th>KT (평균 요금/월)</th>
+          <th>SKT (평균 요금/월)</th>
+          <th>LGU+ (평균 요금/월)</th>
+          <th>주요 결합 혜택</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>광랜 100M</td>
+          <td>22,000원</td>
+          <td>22,000원</td>
+          <td>22,000원</td>
+          <td>TV 결합 시 추가 할인</td>
+        </tr>
+        <tr>
+          <td>기가인터넷 500M</td>
+          <td>33,000원</td>
+          <td>33,000원</td>
+          <td>33,000원</td>
+          <td>모바일 결합 시 최대 할인 적용</td>
+        </tr>
+        <tr>
+          <td>기가인터넷 1G</td>
+          <td>38,500원</td>
+          <td>38,500원</td>
+          <td>38,500원</td>
+          <td>프리미엄 결합 시 요금 <span class="highlight">할인</span></td>
+        </tr>
+        <tr>
+          <td>결합상품 (TV+인터넷)</td>
+          <td>40,000원~</td>
+          <td>40,000원~</td>
+          <td>40,000원~</td>
+          <td><span class="strong">신규 가입</span> <span class="highlight">사은품</span> 증정</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>위 표는 통신사 <span class="strong">평균</span> 요금이며, 여기에 <span class="strong">제휴카드 할인</span>이나 <span class="strong">결합상품</span> 할인을 적용하면 <span class="strong">최종 금액</span>이 달라집니다. 특히 <span class="strong">네이버</span>, <span class="strong">구글</span>, <span class="strong">유튜브</span> 등에서 <span class="strong">인터넷광랜</span> <span class="strong">비교</span>를 통해 <span class="strong">견적</span>을 받아보는 것이 중요합니다. <span class="strong">디시</span> 등 커뮤니티 <span class="strong">후기</span>를 보면 <span class="highlight">신규 가입</span> 시 <span class="highlight">현금지원</span> 금액이 꽤 높으므로, <span class="strong">가격</span> 비교는 필수입니다.</p>
+
+    <div class="chart-container">
+      <canvas id="internetPriceChart" width="800" height="400" aria-label="통신사별 인터넷 속도당 월 요금 비교 그래프" role="img"></canvas>
+    </div>
+    <p>위 그래프는 통신사별 인터넷 속도에 따른 월 요금 <span class="strong">평균</span>을 시각화한 것입니다. 100M, 500M, 1G로 속도가 올라갈수록 <span class="strong">비용</span>이 증가하지만, 속도 대비 <span class="strong">가성비</span>를 따져보면 500M 상품이 가장 효율적임을 알 수 있습니다.</p>
+  </section>
+
+  <section id="benefits">
+    <h2>인터넷광랜 신규 가입 혜택: 현금지원, 사은품, 지원금</h2>
+    <p>인터넷광랜 <span class="strong">가입</span> 시 가장 중요한 혜택은 <span class="strong">현금지원</span>입니다. 통신사 본사보다는 <span class="strong">전문</span> <span class="strong">업체</span>를 통해 <span class="strong">신규 가입</span>을 할 때 더 많은 <span class="highlight">사은품</span>과 <span class="highlight">현금지원</span>을 받을 수 있습니다. 이는 통신사가 판매 채널에 지급하는 수수료의 일부를 소비자에게 돌려주는 방식입니다.</p>
+    <ul>
+      <li><span class="strong">사은품 종류:</span> 현금, 상품권 (신세계, 롯데백화점), 가전제품 (TV, 공기청정기, 청소기 등).</li>
+      <li><span class="strong">현금지원 금액:</span> 통신사와 상품 종류에 따라 다르며, 2026년 <span class="strong">평균</span> <span class="highlight">지원금</span>은 30만원에서 50만원대 사이에서 형성됩니다.</li>
+      <li><span class="strong">통신사별 <span class="highlight">지원금</span> 차이:</span> SKT, KT, LGU+ 모두 비슷한 수준을 유지하지만, 특정 시기별 이벤트나 <span class="strong">전문</span> <span class="strong">업체</span>에 따라 <span class="highlight">혜택</span>이 달라집니다. <span class="strong">싼곳</span>을 찾기 위해선 여러 <span class="strong">비교</span> <span class="strong">견적</span>을 받아보는 것이 필수입니다.</li>
+    </ul>
+    <p>주의할 점은, <span class="highlight">현금지원</span>을 너무 강조하는 <span class="strong">업체</span>의 경우 <span class="strong">가입</span> 이후 연락이 잘 안 되거나 약속된 <span class="highlight">금액</span>을 지급하지 않는 경우가 있을 수 있습니다. 따라서 <span class="highlight">내돈내산</span> <span class="strong">후기</span>가 많고 신뢰할 수 있는 <span class="strong">전문</span> <span class="strong">업체</span>를 선정해야 합니다.</p>
+  </section>
+
+  <section id="saving-tips">
+    <h2>인터넷 요금 절약 방법 및 통신사별 비교 전략</h2>
+    <p>인터넷광랜 <span class="strong">요금</span>을 절약하는 가장 확실한 방법은 <span class="strong">결합상품</span>을 활용하는 것입니다. 통신사들은 모바일 회선과 인터넷, IPTV를 함께 <span class="strong">가입</span>하는 고객에게 대폭적인 할인을 제공합니다. <span class="strong">장점</span>은 매월 고정 지출을 크게 줄일 수 있다는 점이며, <span class="strong">단점</span>은 한번 <span class="strong">결합상품</span>으로 묶이면 통신사 변경이 쉽지 않다는 것입니다.</p>
+    <h3>1. 통신사별 결합상품 전략 분석</h3>
+    <ul>
+      <li><span class="strong">KT:</span> "뭉치면 올레" 및 "프리미엄 가족 결합" 등 가족 단위 결합 혜택이 강력합니다. 전국적으로 가장 넓은 커버리지와 안정적인 품질을 <span class="strong">장점</span>으로 내세우며, 특히 <span class="strong">서울</span>, <span class="strong">경기</span> 지역과 <span class="strong">부산</span>, <span class="strong">대구</span>, <span class="strong">광주</span> 등 주요 광역시는 물론 <span class="strong">강원</span>, <span class="strong">충북</span>, <span class="strong">전남</span> 등 지방 소도시에서도 인프라가 잘 갖춰져 있습니다.</li>
+      <li><span class="strong">SKT:</span> "온가족 할인" 및 "SKT 온가족 프리"를 통해 휴대폰 요금과 인터넷 요금을 할인해 줍니다. 특히 SKT 휴대폰 사용 기간이 길수록 할인율이 높아져 <span class="strong">장기 가입자</span>에게 유리합니다. <span class="strong">수원</span>, <span class="strong">성남</span>, <span class="strong">용인</span> 등 수도권 지역의 <span class="strong">가입</span> 수요가 높습니다.</li>
+      <li><span class="strong">LGU+:</span> "참 쉬운 가족 결합"을 통해 모바일 요금을 할인하고 IPTV에 대한 혜택을 제공합니다. 2026년 들어 IPTV 콘텐츠 경쟁력을 강화하면서 <span class="strong">신규 가입</span> 혜택이 좋아지고 있습니다. <span class="strong">인천</span>, <span class="strong">대전</span>, <span class="strong">울산</span> 등 주요 광역시에서 <span class="strong">가입</span> <span class="strong">순위</span>가 상승하고 있습니다.</li>
+    </ul>
+    <h3>2. 지역별 설치 가능 여부 및 팁</h3>
+    <p>인터넷광랜은 지역별 인프라 <span class="strong">차이점</span>이 큽니다. <span class="strong">서울</span> <span class="strong">강남구</span>나 <span class="strong">부산</span> <span class="strong">해운대구</span> 같은 신도시나 대규모 아파트 단지에서는 <span class="strong">SKT</span>, <span class="strong">KT</span>, <span class="strong">LGU+</span> 3사의 <span class="strong">기가인터넷</span> 설치가 모두 원활합니다. 하지만 <span class="strong">강원도</span> <span class="strong">원주</span>나 <span class="strong">충청도</span> <span class="strong">천안</span>, <span class="strong">전라도</span> <span class="strong">전주</span> 등 지방 소도시에서는 <span class="strong">KT</span>의 인프라가 가장 안정적인 경우가 많습니다.</p>
+    <p>만약 <span class="strong">화성</span>, <span class="strong">파주</span>, <span class="strong">김포</span> 등 신도시 외곽 지역에 거주한다면 <span class="strong">설치 가능 여부</span>를 반드시 먼저 확인해야 합니다. <span class="strong">평택</span>이나 <span class="strong">시흥</span> 지역의 경우에도 통신사별 인프라 구축 현황이 다르기 때문에 <span class="strong">전문</span> <span class="strong">업체</span>에 문의하여 <span class="strong">견적</span>을 받아보는 것이 좋습니다.</p>
+  </section>
+
+  <section id="faq" class="faq">
+    <h2>인터넷광랜 가입 자주 묻는 질문 (FAQ)</h2>
+    <div class="item">
+      <h3>Q1: 인터넷광랜 <span class="highlight">현금지원</span> <span class="highlight">금액</span>은 왜 통신사마다 다른가요?</h3>
+      <p>A: 통신사 본사에서 <span class="strong">가입</span>하는 것과 <span class="strong">전문</span> 대리점에서 <span class="strong">가입</span>하는 것에 <span class="highlight">지원금</span> <span class="strong">차이점</span>이 발생합니다. 대리점은 통신사로부터 받는 수수료 일부를 소비자에게 <span class="highlight">현금지원</span> 형태로 돌려주기 때문입니다. <span class="strong">평균</span>적으로 대리점 <span class="strong">가입</span> 시 <span class="highlight">혜택</span>이 더 크지만, <span class="strong">가입</span> 후 <span class="highlight">지원금</span> 지급이 늦어지거나 누락되는 <span class="strong">단점</span>이 있을 수 있으므로 신뢰할 수 있는 <span class="strong">업체</span>를 선택해야 합니다. <span class="strong">내돈내산</span> <span class="strong">후기</span>를 꼼꼼히 살펴보는 것이 좋습니다.</p>
+    </div>
+    <div class="item">
+      <h3>Q2: 100M 광랜과 500M 기가인터넷의 <span class="strong">체감 속도 차이점</span>은 큰가요?</h3>
+      <p>A: <span class="strong">웹 서핑</span>이나 유튜브 시청 등 일반적인 사용에서는 <span class="strong">차이점</span>을 크게 느끼지 못할 수 있습니다. 하지만 <span class="strong">고화질 스트리밍</span>, <span class="strong">온라인 게임</span>, <span class="strong">대용량 파일 다운로드</span> 시에는 500M <span class="strong">기가인터넷</span>이 훨씬 빠릅니다. 특히 여러 기기가 동시에 접속하여 <span class="strong">AI</span> 서비스나 <span class="strong">ChatGPT</span>를 이용하는 환경에서는 500M 이상의 속도가 <span class="strong">장점</span>을 발휘합니다. <span class="strong">평균</span> <span class="strong">비용</span> <span class="strong">차이점</span>이 크지 않으므로 500M 상품을 <span class="strong">추천</span>합니다.</p>
+    </div>
+    <div class="item">
+      <h3>Q3: 통신사별 <span class="strong">장단점</span>이 궁금합니다. 어떤 통신사가 <span class="strong">추천</span>되나요?</h3>
+      <p>A: <span class="strong">KT</span>는 전국망 인프라가 가장 안정적이며 <span class="strong">품질</span>이 우수합니다. <span class="strong">SKT</span>는 모바일 결합 시 <span class="highlight">할인</span> <span class="highlight">혜택</span>이 가장 크고 <span class="strong">장기 가입자</span>에게 유리합니다. <span class="strong">LGU+</span>는 IPTV 서비스의 콘텐츠 경쟁력이 높고, <span class="strong">신규 가입</span> 시 <span class="highlight">사은품</span> <span class="highlight">지원금</span>이 좋습니다. <span class="highlight">최종 선택</span>은 자신의 <span class="strong">휴대폰 통신사</span>와 거주 지역의 <span class="strong">설치 가능 여부</span>에 따라 결정하는 것이 가장 합리적입니다.</p>
+    </div>
+    <div class="item">
+      <h3>Q4: <span class="strong">인터넷광랜</span> <span class="strong">가입</span> 시 <span class="strong">현금지원</span> <span class="highlight">사은품</span>을 가장 많이 받는 방법은 무엇인가요?</h3>
+      <p>A: <span class="strong">가입</span> 시 <span class="strong">통신사 변경</span>(신규 가입)과 <span class="strong">결합상품</span>(인터넷+TV)을 동시에 진행하는 것이 <span class="highlight">혜택</span>을 극대화하는 방법입니다. 기존 통신사에서는 재약정 시 <span class="highlight">사은품</span> <span class="highlight">지원금</span>이 적지만, <span class="strong">신규 가입</span> 시에는 통신사 이동 <span class="highlight">지원금</span>과 <span class="strong">결합상품</span> <span class="highlight">혜택</span>을 동시에 받을 수 있습니다. <span class="strong">디시</span>나 <span class="strong">네이버</span> 등 <span class="strong">후기</span>를 통해 <span class="strong">전문</span> <span class="strong">업체</span> <span class="strong">순위</span>를 참고하고 <span class="strong">비교</span> <span class="strong">견적</span>을 받아보세요.</p>
+    </div>
+    <div class="item">
+      <h3>Q5: <span class="strong">위약금</span> <span class="strong">금액</span> 계산은 어떻게 하나요? <span class="strong">장점</span>과 <span class="strong">단점</span>이 있나요?</h3>
+      <p>A: <span class="strong">인터넷광랜</span> <span class="strong">가입</span> 시 3년 약정을 하는 경우가 많습니다. <span class="strong">위약금</span>은 약정 기간을 채우지 못하고 해지할 경우 발생하는 <span class="strong">비용</span>입니다. <span class="strong">위약금</span> <span class="strong">금액</span>은 남은 약정 기간, <span class="highlight">할인</span> 받은 <span class="strong">요금</span>, 설치 <span class="strong">비용</span> 등을 복합적으로 계산하여 산정됩니다. <span class="strong">장점</span>은 약정 기간 동안 <span class="strong">저렴한</span> <span class="strong">가격</span>으로 이용할 수 있다는 것이고, <span class="strong">단점</span>은 중도 해지 시 <span class="strong">위약금</span> 부담이 크다는 점입니다. <span class="strong">가입</span> 전 약관을 꼼꼼히 확인하세요.</p>
+    </div>
+    <div class="item">
+      <h3>Q6: <span class="strong">서울</span>, <span class="strong">부산</span>, <span class="strong">대구</span>, <span class="strong">인천</span> 등 지역별 <span class="strong">설치 가능 여부</span>는 어떻게 확인하나요?</h3>
+      <p>A: <span class="strong">인터넷광랜</span> <span class="strong">가입</span> 전 <span class="strong">전문</span> <span class="strong">업체</span>를 통해 주소지를 알려주면 실시간으로 <span class="strong">설치 가능 여부</span>를 확인할 수 있습니다. 특히 <span class="strong">경기</span> <span class="strong">수원</span>, <span class="strong">고양</span>, <span class="strong">용인</span>, <span class="strong">성남</span> 등 인구 밀집도가 높은 수도권 지역은 대부분 설치가 가능합니다. <span class="strong">전북</span> <span class="strong">군산</span>이나 <span class="strong">경북</span> <span class="strong">포항</span> 등 지방의 경우에도 신축 아파트 단지는 <span class="strong">기가인터넷</span> 인프라가 잘 되어 있지만, 구축 단지는 <span class="strong">100M 광랜</span>만 가능할 수 있으므로 반드시 확인해야 합니다.</p>
+    </div>
+    <div class="item">
+      <h3>Q7: <span class="strong">인터넷광랜</span> 가입 시 <span class="strong">현금지원</span> <span class="highlight">사은품</span>을 바로 받을 수 있나요?</h3>
+      <p>A: 일반적으로 <span class="strong">현금지원</span> <span class="highlight">사은품</span>은 인터넷 <span class="strong">설치</span> 완료 후 1~2일 이내에 지급됩니다. <span class="strong">전문</span> <span class="strong">업체</span>마다 지급 시기가 다를 수 있으므로 <span class="strong">가입</span> 전 <span class="strong">업체</span>에 확인하는 것이 좋습니다. <span class="strong">네이버</span> <span class="strong">블로그</span> <span class="strong">후기</span>나 <span class="strong">트위터</span>, <span class="strong">인스타그램</span> 등 SNS 채널을 통해 <span class="highlight">사은품</span> 지급이 신속한 <span class="strong">업체</span>를 <span class="strong">추천</span>받을 수 있습니다.</p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>인터넷광랜 가입 견적 및 상담 문의</h2>
+    <p>아래 양식을 작성하시면 고객님의 거주 지역 및 사용 패턴에 맞는 최적의 <span class="strong">인터넷광랜</span> 상품을 <span class="strong">비교</span> <span class="strong">추천</span>해 드립니다. <span class="strong">요금</span> <span class="strong">절약</span> 방법과 <span class="highlight">현금지원</span> <span class="highlight">사은품</span> <span class="strong">최대</span> <span class="highlight">혜택</span>을 받을 수 있도록 도와드리겠습니다.</p>
+    <form action="/submit-internet-quote" method="post" aria-label="인터넷광랜 견적 문의 폼">
+      <div class="input-section">
+        <div class="input-group">
+          <label for="name">이름</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+        <div class="input-group">
+          <label for="phoneNumber">연락처</label>
+          <input type="tel" id="phoneNumber" name="phoneNumber" pattern="[0-9]{3}-[0-9]{3,4}-[0-9]{4}" placeholder="예: 010-1234-5678" required />
+        </div>
+        <div class="input-group">
+          <label for="email">이메일</label>
+          <input type="email" id="email" name="email" placeholder="example@gmail.com" />
+        </div>
+        <div class="input-group">
+          <label for="address">설치 희망 주소지 (시/군/구)</label>
+          <select id="address" name="address" required>
+            <option value="" disabled selected>선택하세요</option>
+            <option value="서울">서울특별시</option>
+            <option value="부산">부산광역시</option>
+            <option value="대구">대구광역시</option>
+            <option value="인천">인천광역시</option>
+            <option value="광주">광주광역시</option>
+            <option value="대전">대전광역시</option>
+            <option value="울산">울산광역시</option>
+            <option value="세종">세종특별자치시</option>
+            <option value="경기">경기도 (수원, 고양, 용인, 성남, 부천, 화성, 안산, 남양주, 평택, 시흥, 파주, 김포, 의정부)</option>
+            <option value="강원">강원특별자치도 (춘천, 원주, 강릉)</option>
+            <option value="충북">충청북도 (청주, 충주)</option>
+            <option value="충남">충청남도 (천안, 아산)</option>
+            <option value="전북">전라북도 (전주, 익산)</option>
+            <option value="전남">전라남도 (순천, 여수)</option>
+            <option value="경북">경상북도 (포항, 구미)</option>
+            <option value="경남">경상남도 (창원, 김해)</option>
+            <option value="제주">제주특별자치도</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="currentProvider">현재 사용 중인 통신사 (휴대폰)</label>
+          <select id="currentProvider" name="currentProvider" required>
+            <option value="" disabled selected>선택하세요</option>
+            <option value="SKT">SKT</option>
+            <option value="KT">KT</option>
+            <option value="LGU+">LGU+</option>
+            <option value="None">없음/알뜰폰</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="desiredSpeed">희망 인터넷 속도</label>
+          <select id="desiredSpeed" name="desiredSpeed" required>
+            <option value="" disabled selected>선택하세요</option>
+            <option value="100m">광랜 100M</option>
+            <option value="500m">기가인터넷 500M</option>
+            <option value="1g">기가인터넷 1G</option>
+            <option value="10g">10기가 인터넷</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="tvPackage">IPTV 결합 여부</label>
+          <select id="tvPackage" name="tvPackage">
+            <option value="no">인터넷만 신청</option>
+            <option value="yes">인터넷+TV 동시 신청</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="currentContractEndDate">기존 인터넷 약정 만료일</label>
+          <input type="date" id="currentContractEndDate" name="currentContractEndDate" />
+        </div>
+        <div class="input-group" style="grid-column: span 1 / -1;">
+          <label for="additionalInfo">추가 문의 사항</label>
+          <textarea id="additionalInfo" name="additionalInfo" rows="4" placeholder="현금지원 금액, 설치 일정, 특정 상품 문의 등 자유롭게 적어주세요."></textarea>
+        </div>
+      </div>
+      <button type="submit" class="cta-btn">맞춤 견적 요청하기</button>
+    </form>
+  </section>
+
+  <section id="external-resources">
+    <h2>신뢰할 수 있는 외부 참고자료 및 정보원</h2>
+    <p>인터넷광랜 <span class="strong">가입</span> 전 반드시 공식적인 정보원과 <span class="strong">비교</span> <span class="strong">사이트</span>를 참고하여 <span class="strong">내돈내산</span> <span class="strong">후기</span>를 확인하고 <span class="highlight">혜택</span>을 꼼꼼히 따져보세요.</p>
+    <ul>
+      <li><a href="https://www.msit.go.kr" target="_blank" rel="noopener" class="external-link">과학기술정보통신부</a> - 통신 정책 및 서비스 관련 공식 정보 제공.</li>
+      <li><a href="https://www.kcc.go.kr" target="_blank" rel="noopener" class="external-link">방송통신위원회</a> - 통신 서비스 약관 및 소비자 보호 관련 정보.</li>
+      <li><a href="https://www.kt.com" target="_blank" rel="noopener" class="external-link">KT 공식 홈페이지</a> - KT 인터넷 상품 및 요금제 정보.</li>
+      <li><a href="https://www.sktelecom.com" target="_blank" rel="noopener" class="external-link">SKT 공식 홈페이지</a> - SKT 인터넷 상품 및 결합 할인 정보.</li>
+      <li><a href="https://www.lguplus.com" target="_blank" rel="noopener" class="external-link">LGU+ 공식 홈페이지</a> - LGU+ 인터넷 상품 및 IPTV 콘텐츠 정보.</li>
+      <li><a href="https://www.kto.or.kr" target="_blank" rel="noopener" class="external-link">한국통신사업자연합회(KTOA)</a> - 통신사 관련 일반 정보 및 통계.</li>
+    </ul>
+  </section>
+
+  <!-- Chart.js 라이브러리 로드 -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ctx = document.getElementById('internetPriceChart').getContext('2d');
+    const internetPriceChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['SKT', 'KT', 'LGU+'],
+        datasets: [
+          {
+            label: '100M 광랜 (월 요금)',
+            data: [22000, 22000, 22000],
+            backgroundColor: 'rgba(52, 152, 219, 0.8)',
+            borderColor: 'rgba(52, 152, 219, 1)',
+            borderWidth: 1
+          },
+          {
+            label: '500M 기가인터넷 (월 요금)',
+            data: [33000, 33000, 33000],
+            backgroundColor: 'rgba(46, 204, 113, 0.8)',
+            borderColor: 'rgba(46, 204, 113, 1)',
+            borderWidth: 1
+          },
+          {
+            label: '1G 기가인터넷 (월 요금)',
+            data: [38500, 38500, 38500],
+            backgroundColor: 'rgba(231, 76, 60, 0.8)',
+            borderColor: 'rgba(231, 76, 60, 1)',
+            borderWidth: 1
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              stepSize: 5000,
+              callback: value => value.toLocaleString() + '원'
+            },
+            title: {
+              display: true,
+              text: '월 요금 (원)'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: '통신사'
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          tooltip: {
+            callbacks: {
+              label: context => {
+                let label = context.dataset.label || '';
+                if (label) {
+                  label += ': ';
+                }
+                label += context.parsed.y.toLocaleString() + '원';
+                return label;
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+  
